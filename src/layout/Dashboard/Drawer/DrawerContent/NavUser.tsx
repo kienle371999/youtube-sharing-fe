@@ -46,7 +46,7 @@ const NavUser = () => {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
 
-  const { logout, user } = useAuth();
+  const { logout } = useAuth();
   const handleLogout = async () => {
     try {
       await logout();
@@ -95,7 +95,7 @@ const NavUser = () => {
           <ListItemAvatar>
             <Avatar alt="Avatar" src={avatarImage(`./avatar-1.png`)} sx={{ ...(drawerOpen && { width: 46, height: 46 }) }} />
           </ListItemAvatar>
-          <ListItemText primary={user?.name} secondary="UI/UX Designer" />
+          <ListItemText primary={'Hieu'} secondary="UI/UX Designer" />
         </ListItem>
       </List>
       <Menu

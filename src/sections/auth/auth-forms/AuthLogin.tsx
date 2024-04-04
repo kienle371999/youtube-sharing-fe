@@ -27,11 +27,8 @@ import AnimateButton from 'components/@extended/AnimateButton';
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 
-import { fetcher } from 'utils/axios';
-
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-import { preload } from 'swr';
 
 // ============================|| JWT - LOGIN ||============================ //
 
@@ -68,7 +65,6 @@ const AuthLogin = ({ isDemo = false }: { isDemo?: boolean }) => {
             if (scriptedRef.current) {
               setStatus({ success: true });
               setSubmitting(false);
-              preload('api/menu/dashboard', fetcher); // load menu on login success
             }
           } catch (err: any) {
             console.error(err);

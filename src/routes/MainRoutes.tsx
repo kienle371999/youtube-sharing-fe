@@ -5,7 +5,7 @@ import Loadable from 'components/Loadable';
 import DashboardLayout from 'layout/Dashboard';
 
 // render - dashboard
-const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/default')));
+const VideosList = Loadable(lazy(() => import('pages/dashboard/videos-list')));
 
 // render - forms & tables
 const FormsValidation = Loadable(lazy(() => import('pages/forms/validation')));
@@ -22,14 +22,6 @@ const FormsPluginsRecaptcha = Loadable(lazy(() => import('pages/forms/plugins/re
 const FormsPluginsEditor = Loadable(lazy(() => import('pages/forms/plugins/editor')));
 const FormsPluginsDropzone = Loadable(lazy(() => import('pages/forms/plugins/dropzone')));
 
-// pages routing
-const AuthLogin = Loadable(lazy(() => import('pages/auth/login')));
-const AuthRegister = Loadable(lazy(() => import('pages/auth/register')));
-const AuthForgotPassword = Loadable(lazy(() => import('pages/auth/forgot-password')));
-const AuthResetPassword = Loadable(lazy(() => import('pages/auth/reset-password')));
-const AuthCheckMail = Loadable(lazy(() => import('pages/auth/check-mail')));
-const AuthCodeVerification = Loadable(lazy(() => import('pages/auth/code-verification')));
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -41,12 +33,8 @@ const MainRoutes = {
       children: [
         {
           path: 'dashboard',
-          children: [
-            {
-              path: 'default',
-              element: <DashboardDefault />
-            }
-          ]
+          element: <VideosList />,
+          children: []
         },
         {
           path: 'forms',
@@ -106,35 +94,6 @@ const MainRoutes = {
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      path: '/auth',
-      children: [
-        {
-          path: 'login',
-          element: <AuthLogin />
-        },
-        {
-          path: 'register',
-          element: <AuthRegister />
-        },
-        {
-          path: 'forgot-password',
-          element: <AuthForgotPassword />
-        },
-        {
-          path: 'reset-password',
-          element: <AuthResetPassword />
-        },
-        {
-          path: 'check-mail',
-          element: <AuthCheckMail />
-        },
-        {
-          path: 'code-verification',
-          element: <AuthCodeVerification />
         }
       ]
     }

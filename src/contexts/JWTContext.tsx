@@ -19,8 +19,7 @@ const chance = new Chance();
 // constant
 const initialState: AuthProps = {
   isLoggedIn: false,
-  isInitialized: false,
-  user: null
+  isInitialized: false
 };
 
 const verifyToken: (st: string) => boolean = (serviceToken) => {
@@ -57,25 +56,13 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
         const serviceToken = window.localStorage.getItem('serviceToken');
         if (serviceToken && verifyToken(serviceToken)) {
           setSession(serviceToken);
-          const response = await axios.get('/api/account/me');
-          const { user } = response.data;
-          dispatch({
-            type: LOGIN,
-            payload: {
-              isLoggedIn: true,
-              user
-            }
-          });
+          dispatch({ type: LOGIN });
         } else {
-          dispatch({
-            type: LOGOUT
-          });
+          dispatch({ type: LOGOUT });
         }
       } catch (err) {
         console.error(err);
-        dispatch({
-          type: LOGOUT
-        });
+        dispatch({ type: LOGOUT });
       }
     };
 
@@ -83,22 +70,16 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post('/api/account/login', { email, password });
-    const { serviceToken, user } = response.data;
+    const response = await axios.post('/api/users/login', { email, password });
+    const { serviceToken } = response.data;
     setSession(serviceToken);
-    dispatch({
-      type: LOGIN,
-      payload: {
-        isLoggedIn: true,
-        user
-      }
-    });
+    dispatch({ type: LOGIN });
   };
 
   const register = async (email: string, password: string, firstName: string, lastName: string) => {
     // todo: this flow need to be recode as it not verified
     const id = chance.bb_pin();
-    const response = await axios.post('/api/account/register', {
+    const response = await axios.post('/api/users/register', {
       id,
       email,
       password,
