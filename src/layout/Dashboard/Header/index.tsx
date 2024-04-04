@@ -9,7 +9,7 @@ import AppBarStyled from './AppBarStyled';
 import HeaderContent from './HeaderContent';
 import IconButton from 'components/@extended/IconButton';
 
-import { DRAWER_WIDTH, MINI_DRAWER_WIDTH } from 'config';
+// import { DRAWER_WIDTH, MINI_DRAWER_WIDTH } from 'config';
 import useConfig from 'hooks/useConfig';
 import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 
@@ -62,10 +62,7 @@ const Header = () => {
     elevation: 0,
     sx: {
       borderBottom: `1px solid ${theme.palette.divider}`,
-      zIndex: 1200,
-      width: isHorizontal
-        ? '100%'
-        : { xs: '100%', lg: drawerOpen ? `calc(100% - ${DRAWER_WIDTH}px)` : `calc(100% - ${MINI_DRAWER_WIDTH}px)` }
+      zIndex: 1200
     }
   };
 

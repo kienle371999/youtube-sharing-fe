@@ -1,9 +1,6 @@
 // third-party
 import { FormattedMessage } from 'react-intl';
 
-// project-imports
-import { handlerCustomerDialog } from 'api/customer';
-
 // assets
 import {
   BuildOutlined,
@@ -81,20 +78,6 @@ const applications: NavItemType = {
       type: 'collapse',
       icon: icons.CustomerServiceOutlined,
       children: [
-        {
-          id: 'customer-list',
-          title: <FormattedMessage id="list" />,
-          type: 'item',
-          url: '/apps/customer/customer-list',
-          actions: [
-            {
-              type: NavActionType.FUNCTION,
-              label: 'Add Customer',
-              function: () => handlerCustomerDialog(true),
-              icon: icons.PlusOutlined
-            }
-          ]
-        },
         {
           id: 'customer-card',
           title: <FormattedMessage id="cards" />,

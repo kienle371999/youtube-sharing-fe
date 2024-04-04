@@ -11,7 +11,6 @@ import Profile from './Profile';
 import Localization from './Localization';
 import Notification from './Notification';
 import FullScreen from './FullScreen';
-import Customization from './Customization';
 import MobileSection from './MobileSection';
 import MegaMenuSection from './MegaMenuSection';
 
@@ -44,7 +43,6 @@ const HeaderContent = () => {
       <Notification />
       <Message />
       {!downLG && <FullScreen />}
-      <Customization />
       {!downLG && <Profile />}
       {downLG && <MobileSection />}
     </>
