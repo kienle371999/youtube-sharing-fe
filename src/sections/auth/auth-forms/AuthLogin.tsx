@@ -25,10 +25,11 @@ import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
 
 import useAuth from 'hooks/useAuth';
-import useScriptRef from 'hooks/useScriptRef';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import { openSnackbar } from 'api/snackbar';
+import { SnackbarProps } from 'types/snackbar';
 
 // ============================|| JWT - LOGIN ||============================ //
 
@@ -36,7 +37,6 @@ const AuthLogin = ({ isDemo = false }: { isDemo?: boolean }) => {
   const [checked, setChecked] = React.useState(false);
 
   const { login } = useAuth();
-  const scriptedRef = useScriptRef();
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => {
@@ -59,20 +59,19 @@ const AuthLogin = ({ isDemo = false }: { isDemo?: boolean }) => {
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
-        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+        onSubmit={async (values) => {
           try {
             await login(values.email, values.password);
-            if (scriptedRef.current) {
-              setStatus({ success: true });
-              setSubmitting(false);
-            }
-          } catch (err: any) {
-            console.error(err);
-            if (scriptedRef.current) {
-              setStatus({ success: false });
-              setErrors({ submit: err.message });
-              setSubmitting(false);
-            }
+          } catch (error: any) {
+            console.error(error);
+            openSnackbar({
+              open: true,
+              anchorOrigin: { vertical: 'top', horizontal: 'right' },
+              message: error?.data?.message,
+              variant: 'alert',
+              alert: { color: 'error' }
+              // close: true
+            } as SnackbarProps);
           }
         }}
       >

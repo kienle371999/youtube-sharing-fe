@@ -6,6 +6,6 @@ import LoginRoutes from './LoginRoutes';
 
 // ==============================|| ROUTING RENDER ||============================== //
 
-const router = createBrowserRouter([LoginRoutes, MainRoutes], { basename: process.env.REACT_APP_BASE_NAME });
+const router = createBrowserRouter([MainRoutes, LoginRoutes], { basename: process.env.REACT_APP_BASE_NAME });
 
 export default router;

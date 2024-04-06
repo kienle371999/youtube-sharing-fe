@@ -16,7 +16,7 @@ const Header = () => {
   const headerContent = useMemo(() => <HeaderContent />, []);
 
   // common header
-  const mainHeader: ReactNode = <Toolbar>{headerContent}</Toolbar>;
+  const mainHeader: ReactNode = <Toolbar sx={{ justifyContent: 'end' }}>{headerContent}</Toolbar>;
 
   // app-bar params
   const appBar: AppBarProps = {

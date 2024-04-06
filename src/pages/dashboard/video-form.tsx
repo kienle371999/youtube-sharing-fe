@@ -22,7 +22,7 @@ const VideoForm = () => {
             try {
               const params = { url: values.link };
               await post(['/api/videos', params]);
-              navigate('/dashboard');
+              navigate('/');
             } catch (error) {
               console.error('Error: ', error);
             }

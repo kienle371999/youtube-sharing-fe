@@ -19,7 +19,7 @@ const YoutubeCard = ({ url, title, description, likeCount, userId }: YoutubeCard
       <Typography variant="caption" color="secondary">
         {description}
       </Typography>
-      <Button variant="contained" size="small" href={url} sx={{ width: 64 }}>
+      <Button variant="contained" size="small" href={url} sx={{ width: 64 }} target="_blank">
         Link
       </Button>
     </Stack>

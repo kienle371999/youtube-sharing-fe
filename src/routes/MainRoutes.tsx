@@ -18,14 +18,12 @@ const MainRoutes = {
       element: <DashboardLayout />,
       children: [
         {
-          path: '/dashboard',
-          element: <VideoList />,
-          children: []
+          index: true,
+          element: <VideoList />
         },
         {
           path: 'share-videos',
-          element: <VideoForm />,
-          children: []
+          element: <VideoForm />
         }
       ]
     }
