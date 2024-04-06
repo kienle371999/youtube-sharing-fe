@@ -1,25 +1,25 @@
 import useSWR from 'swr';
 import { useMemo } from 'react';
 import { get } from 'utils/axios';
-import { Video } from 'types/video';
+import { VideoPage } from 'types/video';
 
 export const endpoints = {
-  key: 'api/videos'
+  key: (page: number) => `api/videos?page=${page}&take=10`
 };
 
-export function useGetVideos() {
-  const { data, isLoading, error, isValidating } = useSWR(endpoints.key, get, {
+export function useGetVideos(page: number) {
+  const { data, isLoading, error, isValidating } = useSWR(endpoints.key(page), get, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false
   });
 
   const memoizedValue = useMemo(
     () => ({
-      video: data as Video[],
+      videoPage: data as VideoPage,
       videoLoading: isLoading,
       videoError: error,
       videoValidating: isValidating,
-      videoEmpty: !isLoading && !data?.length
+      videoEmpty: !isLoading && !data?.data?.length
     }),
     [data, error, isLoading, isValidating]
   );

@@ -1,7 +1,9 @@
 import { Grid, Stack, TextField, Button } from '@mui/material';
+import { openSnackbar } from 'api/snackbar';
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router';
 import WelcomeBanner from 'sections/dashboard/WelcomeBanner';
+import { SnackbarProps } from 'types/snackbar';
 import { post } from 'utils/axios';
 
 const VideoForm = () => {
@@ -23,8 +25,15 @@ const VideoForm = () => {
               const params = { url: values.link };
               await post(['/api/videos', params]);
               navigate('/');
-            } catch (error) {
+            } catch (error: any) {
               console.error('Error: ', error);
+              openSnackbar({
+                open: true,
+                anchorOrigin: { vertical: 'top', horizontal: 'right' },
+                message: error?.data?.message,
+                variant: 'alert',
+                alert: { color: 'error' }
+              } as SnackbarProps);
             }
           }}
         >

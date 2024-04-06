@@ -19,11 +19,13 @@ import { LogoutOutlined } from '@ant-design/icons';
 
 // types
 import { ThemeMode } from 'types/config';
+import { useGetProfile } from 'api/profile';
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
 const Profile = () => {
   const theme = useTheme();
+  const { profile } = useGetProfile();
   const navigate = useNavigate();
 
   const { logout } = useAuth();
@@ -77,7 +79,7 @@ const Profile = () => {
         <Stack direction="row" spacing={1.25} alignItems="center" sx={{ p: 0.5 }}>
           <Avatar alt="profile user" src={avatar1} size="sm" />
           <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-            {'Hieu'}
+            {profile?.username}
           </Typography>
         </Stack>
       </ButtonBase>
@@ -120,7 +122,7 @@ const Profile = () => {
                         <Stack direction="row" spacing={1.25} alignItems="center">
                           <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
                           <Stack>
-                            <Typography variant="h6">{'Hieu'}</Typography>
+                            <Typography variant="h6">{profile?.username}</Typography>
                           </Stack>
                         </Stack>
                       </Grid>
@@ -133,12 +135,6 @@ const Profile = () => {
                       </Grid>
                     </Grid>
                   </CardContent>
-                  {/* <TabPanel value={value} index={0} dir={theme.direction}>
-                    <ProfileTab handleLogout={handleLogout} />
-                  </TabPanel>
-                  <TabPanel value={value} index={1} dir={theme.direction}>
-                    <SettingTab />
-                  </TabPanel> */}
                 </MainCard>
               </ClickAwayListener>
             </Paper>

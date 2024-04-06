@@ -53,9 +53,9 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
   useEffect(() => {
     const init = async () => {
       try {
-        const serviceToken = window.localStorage.getItem('serviceToken');
-        if (serviceToken && verifyToken(serviceToken)) {
-          setSession(serviceToken);
+        const token = localStorage.getItem('token');
+        if (token && verifyToken(token)) {
+          setSession(token);
           dispatch({ type: LOGIN });
         } else {
           dispatch({ type: LOGOUT });

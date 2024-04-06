@@ -7,13 +7,9 @@ export type GuardProps = {
 };
 
 export type UserProfile = {
-  id?: string;
-  email?: string;
-  avatar?: string;
-  image?: string;
-  name?: string;
-  role?: string;
-  tier?: string;
+  id: number;
+  username: string;
+  email: string;
 };
 
 export interface AuthProps {

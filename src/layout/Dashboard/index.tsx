@@ -26,8 +26,7 @@ const DashboardLayout = () => {
         open: true,
         anchorOrigin: { vertical: 'top', horizontal: 'right' },
         message: `${parsedData?.name} shared the video with title ${parsedData?.title}`,
-        variant: 'alert',
-        alert: { color: 'secondary' }
+        variant: 'alert'
       } as SnackbarProps);
     }
   };

@@ -70,7 +70,6 @@ const AuthLogin = ({ isDemo = false }: { isDemo?: boolean }) => {
               message: error?.data?.message,
               variant: 'alert',
               alert: { color: 'error' }
-              // close: true
             } as SnackbarProps);
           }
         }}
