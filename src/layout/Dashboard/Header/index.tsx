@@ -1,22 +1,16 @@
-import { ReactNode, useMemo } from 'react';
+import { Fragment, ReactNode, useMemo } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { AppBar, Toolbar, useMediaQuery, AppBarProps } from '@mui/material';
+import { AppBar, Toolbar, AppBarProps } from '@mui/material';
 
 // project import
-import AppBarStyled from './AppBarStyled';
 import HeaderContent from './HeaderContent';
-import { useGetMenuMaster } from 'api/menu';
 
 // ==============================|| MAIN LAYOUT - HEADER ||============================== //
 
 const Header = () => {
   const theme = useTheme();
-  const downLG = useMediaQuery(theme.breakpoints.down('lg'));
-
-  const { menuMaster } = useGetMenuMaster();
-  const drawerOpen = menuMaster.isDashboardDrawerOpened;
 
   // header content
   const headerContent = useMemo(() => <HeaderContent />, []);
@@ -36,15 +30,9 @@ const Header = () => {
   };
 
   return (
-    <>
-      {!downLG ? (
-        <AppBarStyled open={drawerOpen} {...appBar}>
-          {mainHeader}
-        </AppBarStyled>
-      ) : (
-        <AppBar {...appBar}>{mainHeader}</AppBar>
-      )}
-    </>
+    <Fragment>
+      <AppBar {...appBar}>{mainHeader}</AppBar>
+    </Fragment>
   );
 };
 
