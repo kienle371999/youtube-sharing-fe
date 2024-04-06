@@ -7,8 +7,6 @@ import ThemeCustomization from 'themes';
 import Locales from 'components/Locales';
 import RTLLayout from 'components/RTLLayout';
 import ScrollTop from 'components/ScrollTop';
-import Snackbar from 'components/@extended/Snackbar';
-import Notistack from 'components/third-party/Notistack';
 
 // auth-provider
 import { JWTProvider as AuthProvider } from 'contexts/JWTContext';
@@ -25,12 +23,7 @@ const App = () => {
         <Locales>
           <ScrollTop>
             <AuthProvider>
-              <>
-                <Notistack>
-                  <RouterProvider router={router} />
-                  <Snackbar />
-                </Notistack>
-              </>
+              <RouterProvider router={router} />
             </AuthProvider>
           </ScrollTop>
         </Locales>

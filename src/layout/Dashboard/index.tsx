@@ -16,6 +16,8 @@ import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 
 // types
 import { MenuOrientation } from 'types/config';
+import { openSnackbar } from 'api/snackbar';
+import { SnackbarProps } from 'types/snackbar';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -38,6 +40,22 @@ const DashboardLayout = () => {
   }, [matchDownXL]);
 
   if (menuMasterLoading) return <Loader />;
+
+  const eventSource = new EventSource(`${process.env.REACT_APP_API_URL}api/video-events`);
+
+  eventSource.onmessage = ({ data }) => {
+    const parsedData = JSON.parse(data);
+
+    if (parsedData) {
+      openSnackbar({
+        open: true,
+        anchorOrigin: { vertical: 'top', horizontal: 'right' },
+        message: `${parsedData?.name} shared the video with title ${parsedData?.title}`,
+        variant: 'alert',
+        alert: { color: 'secondary' }
+      } as SnackbarProps);
+    }
+  };
 
   return (
     <AuthGuard>

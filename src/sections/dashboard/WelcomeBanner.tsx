@@ -30,7 +30,7 @@ const WelcomeBanner = () => {
               Welcome to Funny Movie
             </Typography>
             <Typography variant="h6" color={theme.palette.background.paper}>
-              The purpose of a product is to share new youtube videos.
+              The purpose of this product is to share new youtube videos.
             </Typography>
           </Stack>
         </Grid>

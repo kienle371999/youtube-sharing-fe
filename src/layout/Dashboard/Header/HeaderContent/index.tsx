@@ -1,51 +1,26 @@
-import { useMemo } from 'react';
+import { Fragment } from 'react';
 
 // material-ui
-import { Theme } from '@mui/material/styles';
-import { Box, useMediaQuery } from '@mui/material';
+import { Button } from '@mui/material';
 
 // project import
-import Search from './Search';
-import Message from './Message';
 import Profile from './Profile';
-import Localization from './Localization';
 import Notification from './Notification';
-import FullScreen from './FullScreen';
-import MobileSection from './MobileSection';
-import MegaMenuSection from './MegaMenuSection';
-
-import useConfig from 'hooks/useConfig';
-import DrawerHeader from 'layout/Dashboard/Drawer/DrawerHeader';
-
-// types
-import { MenuOrientation } from 'types/config';
+import { useNavigate } from 'react-router';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
 const HeaderContent = () => {
-  const { i18n, menuOrientation } = useConfig();
-
-  const downLG = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const localization = useMemo(() => <Localization />, [i18n]);
-
-  const megaMenu = useMemo(() => <MegaMenuSection />, []);
+  const navigate = useNavigate();
 
   return (
-    <>
-      {menuOrientation === MenuOrientation.HORIZONTAL && !downLG && <DrawerHeader open={true} />}
-      {!downLG && <Search />}
-      {!downLG && megaMenu}
-      {!downLG && localization}
-      {downLG && <Box sx={{ width: '100%', ml: 1 }} />}
-
+    <Fragment>
+      <Button variant="contained" size="small" onClick={() => navigate('/share-videos')}>
+        Share video
+      </Button>
       <Notification />
-      <Message />
-      {!downLG && <FullScreen />}
-      {!downLG && <Profile />}
-      {downLG && <MobileSection />}
-    </>
+      <Profile />
+    </Fragment>
   );
 };
 

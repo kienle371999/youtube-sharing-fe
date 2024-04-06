@@ -33,12 +33,12 @@ const verifyToken: (st: string) => boolean = (serviceToken) => {
   return decoded.exp > Date.now() / 1000;
 };
 
-const setSession = (serviceToken?: string | null) => {
-  if (serviceToken) {
-    localStorage.setItem('serviceToken', serviceToken);
-    axios.defaults.headers.common.Authorization = `Bearer ${serviceToken}`;
+const setSession = (token?: string | null) => {
+  if (token) {
+    localStorage.setItem('token', token);
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   } else {
-    localStorage.removeItem('serviceToken');
+    localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
   }
 };
@@ -71,8 +71,8 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
 
   const login = async (email: string, password: string) => {
     const response = await axios.post('/api/users/login', { email, password });
-    const { serviceToken } = response.data;
-    setSession(serviceToken);
+    const { token } = response.data;
+    setSession(token);
     dispatch({ type: LOGIN });
   };
 

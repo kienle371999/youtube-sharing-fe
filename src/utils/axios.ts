@@ -1,14 +1,14 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-const axiosServices = axios.create({ baseURL: 'http://localhost:8000/' });
+const axiosServices = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 // ==============================|| AXIOS - FOR MOCK SERVICES ||============================== //
 
 axiosServices.interceptors.request.use(
   async (config) => {
-    const accessToken = localStorage.getItem('serviceToken');
-    if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },
@@ -27,8 +27,6 @@ axiosServices.interceptors.response.use(
   }
 );
 
-export default axiosServices;
-
 export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
   const [url, config] = Array.isArray(args) ? args : [args];
 
@@ -37,10 +35,20 @@ export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
   return res.data;
 };
 
-export const fetcherPost = async (args: string | [string, AxiosRequestConfig]) => {
+export const get = async (args: string | [string, AxiosRequestConfig]) => {
+  const [url, config] = Array.isArray(args) ? args : [args];
+
+  const res = await axiosServices.get(url, { ...config });
+
+  return res.data;
+};
+
+export const post = async (args: string | [string, AxiosRequestConfig]) => {
   const [url, config] = Array.isArray(args) ? args : [args];
 
   const res = await axiosServices.post(url, { ...config });
 
   return res.data;
 };
+
+export default axiosServices;

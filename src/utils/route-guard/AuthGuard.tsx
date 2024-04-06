@@ -15,14 +15,14 @@ const AuthGuard = ({ children }: GuardProps) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('login', {
-        state: {
-          from: location.pathname
-        },
-        replace: true
-      });
-    }
+    // if (!isLoggedIn) {
+    //   navigate('login', {
+    //     state: {
+    //       from: location.pathname
+    //     },
+    //     replace: true
+    //   });
+    // }
   }, [isLoggedIn, navigate, location]);
 
   return children;
