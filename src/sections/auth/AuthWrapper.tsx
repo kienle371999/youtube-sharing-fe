@@ -5,7 +5,6 @@ import { Box, Grid } from '@mui/material';
 
 // project import
 import AuthFooter from 'components/cards/AuthFooter';
-import Logo from 'components/logo';
 import AuthCard from './AuthCard';
 
 // assets
@@ -28,9 +27,6 @@ const AuthWrapper = ({ children }: Props) => (
         minHeight: '100vh'
       }}
     >
-      <Grid item xs={12} sx={{ ml: 3, mt: 3 }}>
-        <Logo />
-      </Grid>
       <Grid item xs={12}>
         <Grid
           item

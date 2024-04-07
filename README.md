@@ -1,3 +1,26 @@
-# mantis-react-ts
+# The client side for Youtube Sharing App
 
-Web theme with name as 'Mantis'. Its name of insect but we derived it from two popular UI framework, Material-UI and Ant Design (M-Ant-is). It provides best features from each. Follows design principle of AntDesign and uses the Component of Material-UI.
+## Introduction
+
+This is a platform to share youtube videos
+
+## Prerequisites
+
+NodeJS 16+ (20.11.1)
+
+## Installation
+
+```
+npm install
+cp .env.example .env
+```
+
+## Running application
+
+```
+npm run start
+```
+
+## Deployment
+
+I use the Github Actions to make CI/CD

@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 
 // third-party
-import { Chance } from 'chance';
 import jwtDecode from 'jwt-decode';
 
 // reducer - state management
@@ -13,8 +12,6 @@ import Loader from 'components/Loader';
 import axios from 'utils/axios';
 import { KeyedObject } from 'types/root';
 import { AuthProps, JWTContextType } from 'types/auth';
-
-const chance = new Chance();
 
 // constant
 const initialState: AuthProps = {
@@ -76,32 +73,12 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
     dispatch({ type: LOGIN });
   };
 
-  const register = async (email: string, password: string, firstName: string, lastName: string) => {
-    // todo: this flow need to be recode as it not verified
-    const id = chance.bb_pin();
-    const response = await axios.post('/api/users/register', {
-      id,
+  const register = async (username: string, email: string, password: string) => {
+    await axios.post('/api/users/register', {
+      username,
       email,
-      password,
-      firstName,
-      lastName
+      password
     });
-    let users = response.data;
-
-    if (window.localStorage.getItem('users') !== undefined && window.localStorage.getItem('users') !== null) {
-      const localUsers = window.localStorage.getItem('users');
-      users = [
-        ...JSON.parse(localUsers!),
-        {
-          id,
-          email,
-          password,
-          name: `${firstName} ${lastName}`
-        }
-      ];
-    }
-
-    window.localStorage.setItem('users', JSON.stringify(users));
   };
 
   const logout = () => {
