@@ -17,7 +17,7 @@ import { SnackbarProps } from 'types/snackbar';
 const DashboardLayout = () => {
   const { container } = useConfig();
 
-  const eventSource = new EventSource(`${process.env.REACT_APP_API_URL}api/video-events`);
+  const eventSource = new EventSource(`${process.env.REACT_APP_API_URL}/api/video-events`);
   eventSource.onmessage = ({ data }) => {
     const parsedData = JSON.parse(data);
 
